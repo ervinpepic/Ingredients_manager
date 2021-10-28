@@ -130,5 +130,4 @@ dmypy.json
 
 .DS_Store
 bin/
-ingredients_manager/
 pyvenv.cfg
