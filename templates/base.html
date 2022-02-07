@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,14 +8,16 @@
   <script src="https://unpkg.com/htmx.org@1.6.1"></script>
   <title>Ingredients manager</title>
 </head>
-<body>
-<form action="/articles/" method="GET">
-  <input type="text" name="query">
-  <input type="submit">
-</form>
-    {% block content %}
 
-    {% endblock content %}
-  
+<body>
+  <form action="/articles/" method="GET">
+    <input type="text" name="query">
+    <input type="submit">
+  </form>
+  {% block content %}
+
+  {% endblock content %}
+
 </body>
+
 </html>

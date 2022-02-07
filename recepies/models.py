@@ -9,6 +9,7 @@ from .utils import number_str_to_float
 
 User = settings.AUTH_USER_MODEL
 
+
 class Recipe(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=250)
@@ -20,10 +21,10 @@ class Recipe(models.Model):
 
     def get_absolute_url(self):
         return reverse("recepies:detail", kwargs={"id": self.id})
-    
+
     def get_update_url(self):
         return reverse("recepies:update", kwargs={"id": self.id})
-    
+
     def get_ingredients_children(self):
         return self.recipeingredient_set.all()
 
@@ -34,7 +35,8 @@ class RecipeIngredient(models.Model):
     description = models.TextField(null=True, blank=True)
     quantity = models.CharField(max_length=50)
     quantity_as_float = models.FloatField(blank=True, null=True)
-    unit = models.CharField(max_length=50, validators=[validate_unit_of_measure])
+    unit = models.CharField(max_length=50, validators=[
+                            validate_unit_of_measure])
     directions = models.TextField(null=True, blank=True)
     timestamp = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -49,19 +51,19 @@ class RecipeIngredient(models.Model):
         ureg = pint.UnitRegistry(system=system)
         measurement = self.quantity_as_float * ureg[self.unit]
         print(measurement)
-        return measurement #.to_base_unit()
+        return measurement  # .to_base_unit()
 
     # def to_ounces(self):
     #     measurement = self.convert_to_system()
     #     return measurement.to('ounces')
 
     def as_mks(self):
-        #mks means Meter, Kilogram, Second
+        # mks means Meter, Kilogram, Second
         measurement = self.convert_to_system(system='mks')
         return measurement.to_base_units()
 
     def as_imperial(self):
-        #imperial means Miles, Pounds, Seconds
+        # imperial means Miles, Pounds, Seconds
         measurement = self.convert_to_system(system='imperial')
         return measurement.to_base_units()
 

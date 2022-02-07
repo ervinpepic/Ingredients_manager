@@ -4,6 +4,7 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 
 # Create your views here.
 
+
 def register_view(request):
     form = UserCreationForm(request.POST or None)
     if form.is_valid():
@@ -13,6 +14,7 @@ def register_view(request):
         "form": form
     }
     return render(request, "accounts/register.html", context)
+
 
 def login_view(request):
     if request.method == "POST":

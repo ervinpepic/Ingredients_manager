@@ -4,6 +4,7 @@ from pint.errors import UndefinedUnitError
 
 valid_unit_measurements = ['pounds', 'lbs', 'oz', 'gram']
 
+
 def validate_unit_of_measure(value):
     ureg = pint.UnitRegistry()
     try:

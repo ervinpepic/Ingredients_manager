@@ -1,17 +1,20 @@
 from django.contrib.auth.decorators import login_required
-from django.forms.models import modelformset_factory #basicaly is model form for querysets
+# basicaly is model form for querysets
+from django.forms.models import modelformset_factory
 from django.shortcuts import redirect, render, get_object_or_404
 
 from .forms import RecipeForm, RecipeIngredientForm
 from .models import Recipe, RecipeIngredient
 
+
 @login_required
 def recipe_list_view(request):
     qs = Recipe.objects.filter(user=request.user)
     context = {
-        "recipes_list" : qs
+        "recipes_list": qs
     }
     return render(request, "recepies/list.html", context)
+
 
 @login_required
 def recipe_detail_view(request, id=None):
@@ -20,6 +23,7 @@ def recipe_detail_view(request, id=None):
         "recipe": recipe
     }
     return render(request, "recepies/detail.html", context)
+
 
 @login_required
 def recipe_create_view(request, id=None):
@@ -40,10 +44,10 @@ def recipe_update_view(request, id=None):
     obj = get_object_or_404(Recipe, id=id, user=request.user)
     form = RecipeForm(request.POST or None, instance=obj)
     RecipeIngredientFormset = modelformset_factory(
-        RecipeIngredient, 
-        form=RecipeIngredientForm, 
+        RecipeIngredient,
+        form=RecipeIngredientForm,
         extra=0)
-    qs = obj.recipeingredient_set.all() #[]
+    qs = obj.recipeingredient_set.all()  # []
     formset = RecipeIngredientFormset(request.POST or None, queryset=qs)
 
     context = {

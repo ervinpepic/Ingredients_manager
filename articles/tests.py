@@ -3,12 +3,14 @@ from django.utils.text import slugify
 from .utils import slugify_instance_title
 from .models import Article
 
+
 class ArticleTestCase(TestCase):
 
     def setUp(self):
         self.number_of_articles = 500
         for i in range(0, self.number_of_articles):
-            Article.objects.create(title="hello world", content="asdflkjsflkajksfd")
+            Article.objects.create(title="hello world",
+                                   content="asdflkjsflkajksfd")
 
     def test_queryset_exists(self):
         qs = Article.objects.all()
@@ -36,7 +38,7 @@ class ArticleTestCase(TestCase):
     def test_slugify_instance_title(self):
         obj = Article.objects.all().last()
         new_slugs = []
-        for i in range(0 , 25):
+        for i in range(0, 25):
             instance = slugify_instance_title(obj, save=False)
             new_slugs.append(instance.slug)
         unique_slugs = list(set(new_slugs))

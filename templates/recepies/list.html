@@ -4,12 +4,11 @@
 {% block content %}
 <h1>My Recipes</h1>
 
-    <a href='{% url "recepies:create" %}'>Create recipe</a>
-    {% for recipe in recipes_list %}
-        <h1><a href='{{ recipe.get_absolute_url }}'>{{recipe.name }}</a></h1>
-        
+<a href='{% url "recepies:create" %}'>Create recipe</a>
+{% for recipe in recipes_list %}
+<h1><a href='{{ recipe.get_absolute_url }}'>{{recipe.name }}</a></h1>
 
-    {% endfor %} 
+
+{% endfor %}
 
 {% endblock content %}
-    
