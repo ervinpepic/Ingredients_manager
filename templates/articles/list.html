@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <p>
+    <a href='{% url "articles:create" %}'>Create article</a>
+    {% for article in articles %}
+      {% if article.title %}
+        <h1><a href='{% url "articles:detail" slug=article.slug %}'>{{article.title }}</a></h1>
+        <p>{{ article.content }}</p> <span>id: {{ article.id }}</span>
+      {% endif %}
+
+    {% endfor %}
+  </p>
+{% endblock content %}
+  

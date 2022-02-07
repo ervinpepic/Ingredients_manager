@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>{{ article_obj.title }}</h1>
+    <p>{{ article_obj.content }}</p>
+    <p>Author: {{article_obj.user }} {% if request.user == article_obj.user %} This is you...{% endif %}</p>
+{% endblock content%}
+
