@@ -51,7 +51,7 @@ def recipe_update_view(request, id=None):
         "formset": formset,
         "object": obj
     }
-    
+
     if all([form.is_valid(), formset.is_valid()]):
         parent = form.save(commit=False)
         parent.save()
@@ -60,5 +60,6 @@ def recipe_update_view(request, id=None):
             child.recipe = parent
             child.save()
         context['message'] = "Data is saved!"
-        
+    if request.htmx:
+        return render(request, 'recepies/snipets/forms.html', context)
     return render(request, "recepies/create-update.html", context)
