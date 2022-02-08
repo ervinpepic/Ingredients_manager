@@ -2,22 +2,8 @@
 
 
 {% block content %}
-
-<h1>{{ recipe.name }}
-    {% if recipe.get_update_url %}
-    <small><a href='{{ recipe.get_update_url }}'>Edit</a></small>
-    {% endif %}
-</h1>
-
-<p>{{ recipe.description }}</p>
-<p>{{ recipe.directions }}</p>
-
-
-{% for ingredient in recipe.get_ingredients_children %}
-<h1>{{ ingredient.name }}</h1>
-<p>{{ ingredient.as_imperial }}</p>
-<p>{{ ingredient.as_mks }}</p>
-{% endfor %}
-
+<div hx-get='{{ hx_url }}' hx-trigger='revealed'>
+    <div class="htmx-indicator">LOADING...</div>
+</div>
 
 {% endblock content %}

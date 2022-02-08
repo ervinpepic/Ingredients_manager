@@ -1,0 +1,124 @@
+[
+{
+    "model": "recepies.recipe",
+    "pk": 1,
+    "fields": {
+        "user": 1,
+        "name": "Baklava",
+        "description": "Evo recept sa edit strane",
+        "directions": "Nova uputstva",
+        "timestamp": "2021-12-09T20:52:18.415Z",
+        "updated": "2022-02-07T22:29:15.369Z",
+        "active": true
+    }
+},
+{
+    "model": "recepies.recipe",
+    "pk": 2,
+    "fields": {
+        "user": 1,
+        "name": "Pile",
+        "description": "Potrevno je ostaviti da se marinira",
+        "directions": "Nakon toga je...",
+        "timestamp": "2021-12-20T21:35:38.617Z",
+        "updated": "2022-02-07T22:36:19.803Z",
+        "active": true
+    }
+},
+{
+    "model": "recepies.recipeingredient",
+    "pk": 1,
+    "fields": {
+        "recipe": 1,
+        "name": "Sos",
+        "description": "potrebno jee",
+        "quantity": "1",
+        "quantity_as_float": 1.0,
+        "unit": "l",
+        "directions": "sdfdsfas",
+        "timestamp": "2021-12-09T21:05:59.099Z",
+        "updated": "2022-02-07T22:29:15.370Z",
+        "active": true
+    }
+},
+{
+    "model": "recepies.recipeingredient",
+    "pk": 2,
+    "fields": {
+        "recipe": 1,
+        "name": "Serbet",
+        "description": null,
+        "quantity": "3",
+        "quantity_as_float": 3.0,
+        "unit": "kg",
+        "directions": null,
+        "timestamp": "2021-12-21T21:26:32.924Z",
+        "updated": "2022-02-07T22:29:15.371Z",
+        "active": true
+    }
+},
+{
+    "model": "recepies.recipeingredient",
+    "pk": 3,
+    "fields": {
+        "recipe": 1,
+        "name": "Ervin Pepic",
+        "description": null,
+        "quantity": "11",
+        "quantity_as_float": 11.0,
+        "unit": "kg",
+        "directions": null,
+        "timestamp": "2022-02-07T20:18:11.777Z",
+        "updated": "2022-02-07T22:29:15.372Z",
+        "active": true
+    }
+},
+{
+    "model": "recepies.recipeingredient",
+    "pk": 4,
+    "fields": {
+        "recipe": 1,
+        "name": "EMEL",
+        "description": null,
+        "quantity": "1",
+        "quantity_as_float": 1.0,
+        "unit": "gr",
+        "directions": null,
+        "timestamp": "2022-02-07T20:18:11.777Z",
+        "updated": "2022-02-07T22:29:15.372Z",
+        "active": true
+    }
+},
+{
+    "model": "recepies.recipeingredient",
+    "pk": 5,
+    "fields": {
+        "recipe": 1,
+        "name": "Ervin Pepic",
+        "description": null,
+        "quantity": "11",
+        "quantity_as_float": 11.0,
+        "unit": "kg",
+        "directions": null,
+        "timestamp": "2022-02-07T20:18:15.447Z",
+        "updated": "2022-02-07T22:29:15.373Z",
+        "active": true
+    }
+},
+{
+    "model": "recepies.recipeingredient",
+    "pk": 6,
+    "fields": {
+        "recipe": 1,
+        "name": "EMEL",
+        "description": null,
+        "quantity": "1",
+        "quantity_as_float": 1.0,
+        "unit": "gr",
+        "directions": null,
+        "timestamp": "2022-02-07T20:18:15.447Z",
+        "updated": "2022-02-07T22:29:15.373Z",
+        "active": true
+    }
+}
+]
