@@ -1,5 +1,6 @@
 import pint
 from django.db import models
+from django.db.models import Q
 
 from django.conf import settings
 from django.urls import reverse
@@ -9,6 +10,23 @@ from .utils import number_str_to_float
 
 User = settings.AUTH_USER_MODEL
 
+class RecipeQuerySet(models.QuerySet):
+    def search(self, search_query=None):
+        if search_query is None or search_query == "":
+            return self.none()
+        lookups = (
+            Q(name__icontains=search_query) | 
+            Q(description__icontains=search_query) |
+            Q(directions__icontains=search_query)
+        )
+        return self.filter(lookups)
+
+class RecipeManager(models.Manager):
+    def get_qeryset(self):
+        return RecipeQuerySet(self.model, using=self._db)
+
+    def search_for_call_in_views_py(self, search_query=None):
+        return self.get_qeryset().search(search_query=search_query)
 
 class Recipe(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -18,6 +36,12 @@ class Recipe(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     active = models.BooleanField(default=True)
+
+    objects = RecipeManager()
+
+    @property
+    def title(self):
+        return self.name
 
     def get_absolute_url(self):
         return reverse("recepies:detail", kwargs={"id": self.id})

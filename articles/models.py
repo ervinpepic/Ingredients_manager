@@ -40,6 +40,10 @@ class Article(models.Model):
 
     objects = ArticleManager()
 
+    @property
+    def name(self):
+        return self.title
+        
     def __str__(self):
         return self.title
 
