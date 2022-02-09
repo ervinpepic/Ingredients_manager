@@ -1,3 +1,4 @@
+from unicodedata import name
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 # basicaly is model form for querysets
@@ -28,11 +29,22 @@ def recipe_detail_view(request, id=None):
 
 @login_required
 def recipe_delete_view(request, id=None):
-    obj = get_object_or_404(Recipe, id=id, user=request.user)
+    try:
+        obj = Recipe.objects.get(id=id, user=request.user)
+    except:
+        obj = None
+    if obj is None:
+        if request.htmx:
+            return HttpResponse("Not Found")
+        raise Http404
     if request.method == "POST":
-        print("OBJEKAT JE", obj)
         obj.delete()
         success_url = reverse('recepies:list')
+        if request.htmx:
+            headers = {
+                'HX-Redirect': success_url
+            }
+            return HttpResponse("Success", headers=headers)
         return redirect(success_url)
     context = {
         "recipe": obj
@@ -41,16 +53,26 @@ def recipe_delete_view(request, id=None):
 
 @login_required
 def recipe_ingredient_delete_view(request, parent_id=None, id=None):
-    obj = get_object_or_404(RecipeIngredient, recipe__id=parent_id, id=id, recipe__user=request.user)
+    try:
+        obj = RecipeIngredient.objects.get(recipe__id=parent_id, id=id, recipe__user=request.user)
+    except:
+        obj = None
+    if obj is None:
+        if request.htmx:
+            return HttpResponse("Not Found")
+        raise Http404
     if request.method == "POST":
-        print("OBJEKAT JE", obj)
+        name = obj.name
         obj.delete()
         success_url = reverse('recepies:detail', kwargs={"id": parent_id})
+        if request.htmx:
+            return render(request, "recepies/snipets/ingredient-inline-delete-respnse.html", {"name": name})
         return redirect(success_url)
     context = {
         "recipe": obj
     }
     return render(request, "recepies/delete.html", context)
+
 
 
 @login_required

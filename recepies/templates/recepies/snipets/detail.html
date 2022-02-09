@@ -2,7 +2,11 @@
     {% if recipe.get_update_url %}
     <small>
         <a href='{{ recipe.get_update_url }}'>Edit</a>
-        <a href='{{ recipe.get_delete_url }}'>Delete</a>
+        <a href='{{ recipe.get_delete_url }}'
+            hx-post="{{ recipe.get_delete_url }}"
+            hx-confirm="Are you sure you want to delete {{ recipe.name }} ?"
+            hx-trigger="click"
+        >Delete</a>
     </small>
     {% endif %}
 </h1>
