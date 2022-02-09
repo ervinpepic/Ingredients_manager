@@ -1,6 +1,9 @@
 <h1>{{ recipe.name }}
     {% if recipe.get_update_url %}
-    <small><a href='{{ recipe.get_update_url }}'>Edit</a></small>
+    <small>
+        <a href='{{ recipe.get_update_url }}'>Edit</a>
+        <a href='{{ recipe.get_delete_url }}'>Delete</a>
+    </small>
     {% endif %}
 </h1>
 

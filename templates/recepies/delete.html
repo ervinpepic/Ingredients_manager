@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+{% if recipe %}
+    <form action="." method="post">
+        {% csrf_token %}
+        <p>Want to delete? {{ recipe.name }}</p>
+        <button type="submit">Yes, delete</button>
+    </form>
+    
+{% endif %}
+    
+
+{% endblock content %}

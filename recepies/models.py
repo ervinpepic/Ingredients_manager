@@ -49,6 +49,9 @@ class Recipe(models.Model):
     def get_update_url(self):
         return reverse("recepies:update", kwargs={"id": self.id})
 
+    def get_delete_url(self):
+        return reverse("recepies:delete", kwargs={"id": self.id})
+
     def get_ingredients_children(self):
         return self.recipeingredient_set.all()
 
@@ -78,6 +81,13 @@ class RecipeIngredient(models.Model):
             "id": self.id
         }
         return reverse("recepies:hx-ingredient-detail", kwargs=kwargs)
+    
+    def get_delete_url(self):
+        kwargs = {
+            "parent_id": self.recipe.id,
+            "id": self.id
+        }
+        return reverse("recepies:ingredient-delete", kwargs=kwargs)
 
     def convert_to_system(self, system='mks'):
         if self.quantity_as_float is None:
