@@ -1,12 +1,10 @@
-from unicodedata import name
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 # basicaly is model form for querysets
-from django.forms.models import modelformset_factory
 from django.shortcuts import redirect, render, get_object_or_404
 from django.http import Http404, HttpResponse
 
-from .forms import RecipeForm, RecipeIngredientForm
+from .forms import RecipeForm, RecipeIngredientForm, RecipeIngredientImageForm
 from .models import Recipe, RecipeIngredient
 
 
@@ -163,3 +161,17 @@ def recipe_ingredient_update_hx_view(request, parent_id=None, id=None):
         return render(request, "recepies/snipets/ingredient-inline.html", context)
 
     return render(request, "recepies/snipets/ingredient-form.html", context)
+
+def recipe_ingredient_image_upload_view(request, parent_id=None):
+    try:
+        parent_obj = Recipe.objects.get(id=parent_id, user=request.user)
+    except: 
+        parent_obj = None
+    if parent_obj is None:
+        raise Http404
+    form = RecipeIngredientImageForm(request.POST or None, request.FILES or None)
+    if form.is_valid():
+        obj = form.save(commit=False)
+        obj.recipe = parent_obj
+        obj.save()
+    return render(request, "recepies/image-form.html", {"form": form})

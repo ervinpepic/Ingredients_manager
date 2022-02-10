@@ -1,8 +1,7 @@
-from pyexpat import model
 import pathlib
-from statistics import mode
 import pint
 import uuid
+
 from django.db import models
 from django.db.models import Q
 
@@ -62,11 +61,14 @@ class Recipe(models.Model):
 def recipe_ingredient_image_upload_handler(instanca, imefajla):
     putanja_fajla = pathlib.Path(imefajla)
     novo_ime_fajla = str(uuid.uuid1())
-    return f"recepies/{novo_ime_fajla}{putanja_fajla.suffix}"
+    return f"recepies/ingredient{novo_ime_fajla}{putanja_fajla.suffix}"
 
 class RecipeIngredientImage(models.Model):
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
     image = models.ImageField(upload_to=recipe_ingredient_image_upload_handler) #path to the file in the database
+
+    def __str__(self):
+        return self.image
 
 class RecipeIngredient(models.Model):
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
