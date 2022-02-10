@@ -1,0 +1,20 @@
+<form 
+    id="image-upload-form"
+    action="." 
+    method="POST" 
+    enctype="multipart/form-data"
+    hx-post="{{ request.path }}"
+    hx-encoding="multipart/form-data"    
+    > {% csrf_token %}
+    {{ form.as_p }}
+    <div>
+        <progress id="progress-bar" value="0" max="100"></progress>
+    </div>
+    <div style="margin-top: 10px;"><button type="submit">Upload an image</button></div>
+</form>
+
+<script>
+    htmx.on("#image-upload-form", 'htmx:xhr:progress', function(event) {
+        htmx.find('#progress-bar').setAttribute('value', event.detail.loaded/event.detail.total * 100);
+    });
+</script>

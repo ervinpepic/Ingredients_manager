@@ -1,6 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
-<form action="" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+<form 
+    action="." 
+    method="POST" 
+    enctype="multipart/form-data"
+    hx-post="{{ request.path }}"
+    hx-encoding="multipart/form-data"    
+    > {% csrf_token %}
     {{ form.as_p }}
     <div style="margin-top: 10px;"><button type="submit">Upload an image</button></div>
 </form>

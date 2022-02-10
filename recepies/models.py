@@ -68,7 +68,7 @@ class RecipeIngredientImage(models.Model):
     image = models.ImageField(upload_to=recipe_ingredient_image_upload_handler) #path to the file in the database
 
     def __str__(self):
-        return self.image
+        return str(self.image)
 
 class RecipeIngredient(models.Model):
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
