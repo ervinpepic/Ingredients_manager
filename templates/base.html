@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,22 +7,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://unpkg.com/htmx.org@1.6.1"></script>
-  <title>Ingredients manager</title>
-  <style>
-    .htmx-indicator {
-      display: none;
-    }
-    .htmx-request .htmx-inidcator {
-      display: inline;
-    }
+  <link rel="stylesheet" href="{% static 'recepies/recipes-htmx.css' %}">
 
-    .htmx-inverted-indicator {
-      display: inline;
-    }
-    .htmx-request .htmx-inverted-indicator {
-      display: none;
-    }
-  </style>
+  <title>Ingredients manager</title>
+
 </head>
 
 <body>
@@ -32,7 +21,7 @@
 
   <script>
     document.body.addEventListener('htmx:configRequest', (evt) => {
-        evt.detail.headers['X-CSRFToken'] = '{{csrf_token}}'
+      evt.detail.headers['X-CSRFToken'] = '{{csrf_token}}'
     });
   </script>
 

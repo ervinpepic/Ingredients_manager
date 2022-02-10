@@ -1,0 +1,20 @@
+.htmx-indicator {
+    display: none;
+}
+
+.htmx-request .htmx-inidcator {
+    display: inline;
+}
+
+.htmx-inverted-indicator {
+    display: inline;
+}
+
+.htmx-request .htmx-inverted-indicator {
+    display: none;
+}
+
+body {
+    background-color: rgb(68, 78, 88);
+    color: white;
+}
